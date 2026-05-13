@@ -5,39 +5,54 @@ import { motion  } from "framer-motion";
 import { Product } from "@/types";
 import Image from "next/image";
 import IconButton from "./icon-button";
-import { Expand, ShoppingCart } from "lucide-react";
+import { Expand, Heart, ShoppingCart } from "lucide-react";
 import Currency from "./currency";
 import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
 import usePreviewModal from "@/hooks/use-preview-modal";
+import { useWishlist } from "@/hooks/useWishlist";
+import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 
 interface ProductCardProps {
     data: Product;
 }
 
 
-const ProductCard: React.FC<ProductCardProps> = ({
-    data
-
-}) => {
+const ProductCard: React.FC<ProductCardProps> = ({data}) => {
 
     const previewModal = usePreviewModal();
     const router = useRouter();
     const cart = useCart();
+    const { toggle, isWishlisted } = useWishlist();
+    const { addToRecent } = useRecentlyViewed();
+
+    const wishlisted = isWishlisted(data.id);
 
     const handleClick = () => {
+        addToRecent({
+            id: data.id,
+            name: data.name,
+            category: data.category?.name,
+            imageUrl: data.images?.[0]?.url,
+            slug: data.id,
+            price: data.price,
+        });
         router.push(`/product/${data.id}`);
     }
 
     const onPreview: MouseEventHandler<HTMLButtonElement>= (event) => {
         event.stopPropagation();
-
         previewModal.onOpen(data);
     }
 
     const onAddToCart:MouseEventHandler<HTMLButtonElement> = (event) => {
         event.stopPropagation();
         cart.addItem(data);
+    };
+
+    const onWishList:MouseEventHandler<HTMLButtonElement> = (event) => {
+        event.stopPropagation();
+        toggle(data.id);
     };
 
     return (
@@ -54,7 +69,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     <span className="bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercae tracking-widest text-black shadow-sm">
                         New Arrival
                     </span>
-                </div>
+                </div>  
+
+                <button
+                onClick={onWishList}
+                className={`absolute top-3 right-3 z-10 w-8 h-8 rounded-full flex items-center justify-center border transition-all ${wishlisted? "bg-red-50 border-red-200 text-red-500" : "bg-white/80 border-white/50 text-gray-400 hover:text-red-400 hover:border-red-200"}`}
+                aria-label={wishlisted ? "Hapus dari wishlist" : "Tambah ke wishlist"}
+                >
+                    <Heart size={14} fill={wishlisted? "currentColor" : "none"}/>
+                </button>
+
                 <Image alt="Image" 
                 src={data?.images?.[0]?.url}
                 fill
@@ -85,7 +109,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </div>
         </motion.div>
     );
-
 }
 
 export default ProductCard;

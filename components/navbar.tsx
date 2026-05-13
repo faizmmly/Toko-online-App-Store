@@ -16,6 +16,13 @@ interface NavbarProps {
 const Navbar =  async ({products}: {products: Product[]}) => {
     const categories = await getCategories();
 
+    const mappedProducts = products.map((p) => ({
+    id: p.id,
+    name: p.name,
+    category: p.category.name,
+    slug: p.id,
+  }));
+
     return (
         <div className="sticky top-0 z-50 w-full border-b bg-white/70 backdrop-blur-md">
                 <Container>
@@ -30,16 +37,18 @@ const Navbar =  async ({products}: {products: Product[]}) => {
                 </div>
 
 
-                <SearchBar products={products.map(p => ({
-                    id: p.id,
-                    name: p.name,
-                    category: p.category.name,
-                    slug: p.id,
-                }))}/>
+                <div className="hidden sm:block max-w-64 lg:w-80">
+                    <SearchBar products={mappedProducts} />
+                </div>
 
-                <div className="md:hidden px-4 pb-3">
+                <div className="ml-auto flex items-center gap-x-2 shrink-0">
                 <NavbarActions />
                 </div>
+                </div>
+
+
+                <div className="sm:hidden px-4 pb-3">
+                <SearchBar products={mappedProducts}/>
                 </div>
             </Container>
         </div>

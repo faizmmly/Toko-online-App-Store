@@ -2,6 +2,7 @@ import getBanner from "@/actions/get-banner";
 import getProducts from "@/actions/get-products";
 import Banner from "@/components/banner";
 import ProductList from "@/components/product-list";
+import RecentlyViewed from "@/components/recently-viewed";
 import Container from "@/components/ui/container"
 
 export const revalidate = 0;
@@ -28,6 +29,7 @@ const HomePage =  async () => {
 
                 <div className="px-4 sm:px-6 lg:px-8">
                     <ProductList title="Product unggulan" items={product} />
+                    <RecentlyViewed />
                 </div>
             </div>
         </Container>
