@@ -31,12 +31,23 @@ const MainNav: React.FC<MainNavProps> = ({
                         "text-sm font-medium transition-colors hover:text-black",
                         route.active ? "text-black" : "text-neutral-500"
                     )}
-                >
-                    {route.label}
+                    >
 
-                    {route.active && (
-                        <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black rounded-full"/>
+                    <motion.span
+                            className={cn (
+                                "absolute inset-0 rounded-full",
+                        route.active ? "bg-black" : "bg-transparent group-hover:bg-gray-100"
                     )}
+                        layoutId={route.active ? "active-bg" : undefined}
+                        transition={{ type: "spring", stiffness: 400, damping: 300}}
+                    />
+
+                    <span className={cn(
+                        "relative z-10 transition-colors",
+                        route.active ? "text-white" : "text-neutral-500 group-hover:text-black"
+                    )}> 
+                    {route.label}
+                    </span>
                 </Link>
             ))}
         </nav>

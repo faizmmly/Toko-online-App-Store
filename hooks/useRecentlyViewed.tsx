@@ -7,12 +7,12 @@ const MAX_ITEMS = 6;
 
 
 export interface RecentProduct {
-    id: String;
-    name: String;
-    category: String;
-    imageUrl?: String;
-    slug?: String;
-    price: String;
+    id: string;
+    name: string;
+    category: string;
+    imageUrl?: string;
+    slug?: string;
+    price: string;
 }
 
 export function useRecentlyViewed(){
