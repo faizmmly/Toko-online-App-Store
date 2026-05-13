@@ -4,10 +4,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 interface Product {
-    id: String;
-    name: String;
-    category: String;
-    slug?: String;
+    id: string;
+    name: string;
+    category: string;
+    slug?: string;
 }
 
 interface SearchBarProps {
