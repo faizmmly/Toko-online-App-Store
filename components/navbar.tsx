@@ -41,7 +41,7 @@ const Navbar =  async ({products}: {products: Product[]}) => {
                     </div>
                 </div>
 
-                <div className="flex items-center shrink-0">
+                <div className="ml-auto flex items-center shrink-0">
                 <NavbarActions />
                     </div>
                 </div>
