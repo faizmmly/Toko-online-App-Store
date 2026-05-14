@@ -24,30 +24,29 @@ const Navbar =  async ({products}: {products: Product[]}) => {
   }));
 
     return (
-        <div className="sticky top-0 z-50 w-full border-b bg-white/70 backdrop-blur-md">
-                <Container>
-                    <div className="px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-x-4">
-                    <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
-                <p className="text-2xl font-bold tracking-tighter italic"><span className="hidden min-[380px]:inline">Toko</span> Faiz
-                <span className="text-blue-600"> Market</span></p>
+        <div className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white backdrop-blur-md">
+            <Container>
+                <div className="px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-x-4">
+                    
+                <Link href="/" className="flex shrink-0 items-center gap-x-1">
+                    <p className="text-xl font-bold tracking-tight italic">
+                    <span className="hidden min-[380px]:inline">Toko</span> Faiz
+                    <span className="text-blue-600"> Market</span></p>
                 </Link>
                 
-                <div className="hidden md:flex flex-1 px-4 overflow-x-auto no-scrollbar">
+                <div className="hidden md:flex flex-1 items-center justify-center gap-x-6">
                 <MainNav data={categories} />
-                </div>
-
-
-                <div className="hidden sm:block max-w-64 lg:w-80">
+                <div className="w-56 lg:w-72">
                     <SearchBar products={mappedProducts} />
+                    </div>
                 </div>
 
-                <div className="ml-auto flex items-center gap-x-2 shrink-0">
+                <div className="flex items-center shrink-0">
                 <NavbarActions />
-                </div>
+                    </div>
                 </div>
 
-
-                <div className="sm:hidden px-4 pb-3">
+                <div className="md:hidden px-4 pb-2.5">
                 <SearchBar products={mappedProducts}/>
                 </div>
             </Container>
