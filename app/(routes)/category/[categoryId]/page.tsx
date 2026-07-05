@@ -23,11 +23,15 @@ const CategoryPage= async ({params }: CategoryPageProps) => {
 
         <div className="bg-white">
             <Container>
-                <Banner data={category.banner}/>
+                <div className="p-4 sm:p-6 lg:p-8 rounded-xl overflow-hidden">
+                    <Banner data={category.banner}/>
+                </div>
+
                 <div className="px-4 sm:px-6 lg:px-8 pb-24">
                     <div className="mt-6 lg:col-span-4 lg:mt-0">
                         {products.length === 0 && <NoResult />}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
                             {products.map((item) => (
                                 <ProductCard key={item.id} data={item} /> 
                             ))}

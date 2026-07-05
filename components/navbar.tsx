@@ -24,9 +24,9 @@ const Navbar =  async ({products}: {products: Product[]}) => {
   }));
 
     return (
-        <div className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white backdrop-blur-md">
+        <div className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white">
             <Container>
-                <div className="px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-x-4">
+                <div className="px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-x-4 justify-between">
                     
                 <Link href="/" className="flex shrink-0 items-center gap-x-1">
                     <p className="text-xl font-bold tracking-tight italic">
@@ -34,20 +34,21 @@ const Navbar =  async ({products}: {products: Product[]}) => {
                     <span className="text-blue-600"> Market</span></p>
                 </Link>
                 
-                <div className="hidden md:flex flex-1 items-center justify-center gap-x-6">
+                <div className="hidden md:flex flex-1 items-center justify-center gap-x-6 mx-4">
                 <MainNav data={categories} />
-                <div className="w-56 lg:w-72">
+
+                <div className="flex-1 max-w-md ml-auto">
                     <SearchBar products={mappedProducts} />
                     </div>
                 </div>
 
-                <div className="ml-auto flex items-center shrink-0">
+                <div className="flex items-center shrink-0">
                 <NavbarActions />
                     </div>
                 </div>
 
                 <div className="md:hidden px-4 pb-2.5">
-                <SearchBar products={mappedProducts}/>
+                    <SearchBar products={mappedProducts}/>
                 </div>
             </Container>
         </div>

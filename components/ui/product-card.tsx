@@ -58,7 +58,7 @@ const ProductCard: React.FC<ProductCardProps> = ({data}) => {
     return (
         <motion.div
         whileTap = {{scale: 0.95}}
-        className="group bg-white rounded-xl border p-3 space-y-3"
+        className="group bg-white rounded-xl border p-3 flex flex-col justify-between h-full cursor-pointer"
         whileHover={{ y: -5}}
         transition={{ type: "spring", stiffness: 400, damping: 17}}
         onClick={handleClick}
@@ -66,7 +66,7 @@ const ProductCard: React.FC<ProductCardProps> = ({data}) => {
         
             <div className="aspect-square rounded-xl bg-gray-100 relative overflow-hidden">
                 <div className="absolute top-3 left-3 z-10">
-                    <span className="bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercae tracking-widest text-black shadow-sm">
+                    <span className="bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-black shadow-sm">
                         New Arrival
                     </span>
                 </div>  
@@ -101,10 +101,11 @@ const ProductCard: React.FC<ProductCardProps> = ({data}) => {
             </div>
             {/* description product */}
             <div className="space-y-1">
-                <p className="font-semibold text-lg line-clamp-1 break-words">{data.name}</p>
+                <p className="font-semibold text-sm md:text-base line-clamp-1 break-words text-neutral-800 min-h-[40px] md:min-h-[48px]">
+                    {data.name}</p>
                 <p className=" text-sm text-gray-500">{data.category?.name}</p>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pt-2 border-t border-neutral-50 mt-3">
                 <Currency value={data?.price} />
             </div>
         </motion.div>

@@ -3,11 +3,18 @@
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed"
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 
 export default function RecentlyViewed(){
     const { recentlyViewed, clearRecent} = useRecentlyViewed();
+    const [isMounted, setIsMounted] = useState(false);
 
+    useEffect (() => {
+        setIsMounted(true);
+    }, []);
+
+    if(!isMounted) return null;
     if(recentlyViewed.length == 0) return null;
 
 

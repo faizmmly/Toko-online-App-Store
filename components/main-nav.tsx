@@ -28,8 +28,8 @@ const MainNav: React.FC<MainNavProps> = ({
                     key={route.href}
                     href={route.href}
                     className={cn(
-                        "text-sm font-medium transition-colors hover:text-black",
-                        route.active ? "text-black" : "text-neutral-500"
+                        "relative px-3 py-1.5 text-sm font-medium transition-colors rounded-full group",
+                        route.active ? "text-white" : "text-neutral-500 hover:text-black"
                     )}
                     >
 

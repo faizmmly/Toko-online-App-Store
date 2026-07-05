@@ -29,8 +29,8 @@ const HomePage =  async () => {
 
                 <div className="px-4 sm:px-6 lg:px-8">
                     <ProductList title="Product unggulan" items={product} />
-                    <RecentlyViewed />
                 </div>
+                    <RecentlyViewed />
             </div>
         </Container>
     )
