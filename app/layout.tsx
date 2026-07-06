@@ -8,6 +8,7 @@ import ModalProvider from "@/providers/modal-provider";
 import ToastProvider from "@/providers/toast-provider";
 import SearchBar from "@/components/search-bar";
 import getProducts from "@/actions/get-products"; 
+import { ThemeProvider } from "@/components/theme-provider";
 
 const font = Urbanist({
   variable: "--font-geist-sans",
@@ -27,17 +28,25 @@ export default async function RootLayout({
   const products = await getProducts();
 
   return (
-    <html lang="en">
-      <body className={font.className}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${font.className} bg-white dark:bg-neutral-900 text-black dark:text-neutral-100 transition-colors duration-300`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
         <ToastProvider />
         <ModalProvider />
-        <Suspense fallback={<div className="h-20 w-full bg-white border-b" />}>
-        <Navbar products={products} />
+
+        <Suspense fallback={<div className="h-20 w-full bg-white dark:bg-neutral-900 border-b dark:border-neutral-800" />}>
+          <Navbar products={products} />
         </Suspense>
         <main className="min-h-screen">
-        {children}
+          {children}
         </main>
+        
         <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

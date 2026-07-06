@@ -21,12 +21,12 @@ export default function RecentlyViewed(){
     return (
          <section className="py-8">
             <div className="flex items-center justify-between mb-4">
-                <h2 className="text-sm font-semibold text-gray-800 uppercase tracking-widest">
+                <h2 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
                     Terakhir Dilihat
                 </h2>
                 <button
                 onClick={clearRecent}
-                className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-sm text-gray-500 dark:text-neutral-400 hover:underline"
                 >
                     Hapus Semua
                 </button>
@@ -39,7 +39,7 @@ export default function RecentlyViewed(){
                     href={`/product/${product.slug ?? product.id}`}
                     className="flex-shrink-0 w-[90px] group"
                     >
-                        <div className="w-[90px] h-[90px] rounded-xl bg-gray-100 overflow-hidden border border-gray-100 group-hover:border-gray-300 transition-colors relative">
+                        <div className="w-[90px] h-[90px] rounded-xl bg-gray-100 dark:bg-neutral-800 overflow-hidden border border-gray-100 group-hover:border-gray-300 dark:group-hover:border-neutral-500 transition-colors relative">
                             {product.imageUrl ? (
                                 <Image 
                                 src={product.imageUrl}
@@ -57,7 +57,7 @@ export default function RecentlyViewed(){
                                 </div>
                             )}
                         </div>
-                        <p className="mt-1.5 text-[11px] text-gray-500 leading-tight line-clamp-2 text-center">
+                        <p className="mt-1.5 text-[11px] text-gray-500 dark:text-neutral-400 leading-tight line-clamp-2 text-center transition-colors">
                             {product.name}
                         </p>
                     </Link>

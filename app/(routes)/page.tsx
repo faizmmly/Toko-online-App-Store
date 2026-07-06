@@ -15,24 +15,28 @@ const HomePage =  async () => {
     const [product, banner] = await Promise.all([productsData, bannerData]);
 
     return (
-        <Container>
-            <div className="space-y-10 pb-10">
-                <div className="pt-4">
-                </div>
-                {banner? (
-                    <Banner data={banner} />
-                ) : (
-                    <div className="h-[300px] w-full bg-gray-100 animate-pulse rounded-xl flex items-center justify-center">
-                            <p className="text-gray-400">Banner belum diatur di Admin</p>
-                        </div>
-                )}
+        <div className="bg-white dark:bg-neutral-900 transition-colors duration-300">
+            <Container>
+                <div className="space-y-12 pb-16 pt-6">
+                    
+                    {banner? (
+                        <Banner data={banner} />
+                    ) : (
+                        <div className="h-[200px] sm:h[300px] md:h[400px] w-full bg-gray-50 dark:bg-neutral-800 border-dashed border-gray-200 dark:border-neutral-700 animate-pulse rounded-2xl flex items-center justify-center">
+                                <p className="text-sm font-medium text-gray-400">Banner belum diatur di Admin</p>
+                            </div>
+                    )}
 
-                <div className="px-4 sm:px-6 lg:px-8">
-                    <ProductList title="Product unggulan" items={product} />
+                    <div className="px-4 sm:px-6 lg:px-8">
+                        <ProductList title="Product unggulan" items={product} />
+                    </div>
+
+                    <div className="px-4 sm:px-6 lg:px-8">
+                        <RecentlyViewed />
+                    </div>
                 </div>
-                    <RecentlyViewed />
-            </div>
-        </Container>
+            </Container>
+        </div>
     )
 }
 export default HomePage;

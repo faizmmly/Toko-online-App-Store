@@ -25,15 +25,14 @@ const NavbarActions = () => {
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 0.3 }}
             onClick={() => router.push("/cart")}
-            className="flex items-center rounded-full bg-black px-4 py-2"
+            className="flex items-center rounded-full dark:bg-white bg-black px-4 py-2 transition-colors duration-300"
             >
-                <ShoppingBag size={20} color="white"/>
-                <span className="ml-2 text-sm font-medium text-white">
+                <ShoppingBag size={20} className="text-white dark:text-black"/>
+
+                <span className="ml-2 text-sm font-medium text-white dark:text-black">
                 {cart.items.length}
                 </span>
         
-                {/* Efek Berdenyut jika ada barang */}
-                {cart.items.length}
                 </motion.button>
         </div>
     );

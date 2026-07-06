@@ -5,6 +5,7 @@ import getCategories from "@/actions/get-categories";
 import NavbarActions from "./navbar-actions";
 import SearchBar from "./search-bar";
 import { Product } from "@/types";
+import { ThemeToggle } from "./theme-toogle";
 
 
 export const revalidate = 0
@@ -24,7 +25,7 @@ const Navbar =  async ({products}: {products: Product[]}) => {
   }));
 
     return (
-        <div className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white">
+        <div className="sticky top-0 z-50 w-full border-b border-gray-100 dark:border-neutral-800 bg-white dark:bg-neutral-900 transition-colors duration-300">
             <Container>
                 <div className="px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-x-4 justify-between">
                     
@@ -42,8 +43,9 @@ const Navbar =  async ({products}: {products: Product[]}) => {
                     </div>
                 </div>
 
-                <div className="flex items-center shrink-0">
-                <NavbarActions />
+                <div className="flex items-center gap-x-3 shrink-0">
+                    <ThemeToggle />
+                    <NavbarActions />
                     </div>
                 </div>
 

@@ -28,6 +28,16 @@ const CategoryPage= async ({params }: CategoryPageProps) => {
                 </div>
 
                 <div className="px-4 sm:px-6 lg:px-8 pb-24">
+
+                    <div className="mb-8 border-b border-gray-100 pb-5">
+                        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 capitalize">
+                            Koleksi {category.name}
+                        </h2>
+                        <p className="mt-2 text-sm text-neutral-500">
+                            Menampilkan <span className="font-semibold text-black">{products.length}</span> produk pilihan terbaik anda.
+                        </p>
+                    </div>
+
                     <div className="mt-6 lg:col-span-4 lg:mt-0">
                         {products.length === 0 && <NoResult />}
 
