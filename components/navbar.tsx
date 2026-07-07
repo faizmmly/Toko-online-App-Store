@@ -6,6 +6,7 @@ import NavbarActions from "./navbar-actions";
 import SearchBar from "./search-bar";
 import { Product } from "@/types";
 import { ThemeToggle } from "./theme-toogle";
+import NotificationDropdown from "./notification-dropdown";
 
 
 export const revalidate = 0
@@ -45,6 +46,7 @@ const Navbar =  async ({products}: {products: Product[]}) => {
 
                 <div className="flex items-center gap-x-3 shrink-0">
                     <ThemeToggle />
+                    <NotificationDropdown />
                     <NavbarActions />
                     </div>
                 </div>

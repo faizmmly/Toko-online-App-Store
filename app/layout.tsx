@@ -9,6 +9,8 @@ import ToastProvider from "@/providers/toast-provider";
 import SearchBar from "@/components/search-bar";
 import getProducts from "@/actions/get-products"; 
 import { ThemeProvider } from "@/components/theme-provider";
+import { ClerkProvider } from "@clerk/nextjs";
+import AnnouncementBar from "@/components/announcement-bar";
 
 const font = Urbanist({
   variable: "--font-geist-sans",
@@ -16,7 +18,7 @@ const font = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: "Toko Online",
+  title: "Faiz Market",
   description: "Toko online dengan Next.js",
 };
 
@@ -28,6 +30,7 @@ export default async function RootLayout({
   const products = await getProducts();
 
   return (
+    <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <body className={`${font.className} bg-white dark:bg-neutral-900 text-black dark:text-neutral-100 transition-colors duration-300`}>
         <ThemeProvider
@@ -38,16 +41,19 @@ export default async function RootLayout({
         <ToastProvider />
         <ModalProvider />
 
+        <AnnouncementBar />
+
         <Suspense fallback={<div className="h-20 w-full bg-white dark:bg-neutral-900 border-b dark:border-neutral-800" />}>
           <Navbar products={products} />
         </Suspense>
         <main className="min-h-screen">
           {children}
         </main>
-        
+
         <Footer />
         </ThemeProvider>
       </body>
     </html>
+    </ClerkProvider>
   );
 }

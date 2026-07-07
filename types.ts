@@ -32,6 +32,7 @@ export interface Product {
     size: Size;
     color: Color;
     images: Image[];
+    createdAt: string;
 }
 
 export interface Image {

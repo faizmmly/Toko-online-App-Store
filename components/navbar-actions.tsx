@@ -5,6 +5,7 @@ import useCart from "@/hooks/use-cart";
 import { ShoppingBag } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
+import { SignInButton, UserButton, Show} from "@clerk/nextjs";
 
 const NavbarActions = () => {
     const [isMounted, setIsMounted] = useState(false);
@@ -32,8 +33,25 @@ const NavbarActions = () => {
                 <span className="ml-2 text-sm font-medium text-white dark:text-black">
                 {cart.items.length}
                 </span>
-        
                 </motion.button>
+
+                <Show when="signed-out">
+                    <SignInButton mode="modal">
+                        <button className="px-4 py-2 text-sm font-medium text-white bg-black dark:bg-white dark:text-black rounded-full hover:opacity-80 transition duration-300">
+                            Masuk
+                        </button>
+                    </SignInButton>
+                </Show>
+
+                <Show when="signed-in">
+                <UserButton 
+                    appearance={{
+                        elements: {
+                            avatarBox: "h-9 w-9 border dark:border-neutral-700" // Sesuaikan ukuran avatar biar proporsional
+                        }
+                    }}
+                />
+            </Show>
         </div>
     );
 }
