@@ -51,7 +51,7 @@ const NotificationDropdown = () => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <MenuItems className="absolute right-0 mt-2 w-80 md:w-96 origin-top-right rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-2 shadow-xl ring-1 ring-black/5 focus:outline-none z-50">
+        <MenuItems className="fixed md:absolute left-4 right-4 md:left-auto md:right-0 mt-2 top-16 md:top-auto w-[calc(100vw-32px)] sm:w-96 max-w-sm origin-top rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-2 shadow-xl ring-1 ring-black/5 focus:outline-none z-50">
           
           {/* Header Pop-up */}
           <div className="px-3 py-2 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">

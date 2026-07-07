@@ -44,7 +44,7 @@ const Navbar =  async ({products}: {products: Product[]}) => {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-x-3 shrink-0">
+                <div className="flex items-center gap-x-1.5 sm:gap-3 shrink-0 ml-auto">
                     <ThemeToggle />
                     <NotificationDropdown />
                     <NavbarActions />

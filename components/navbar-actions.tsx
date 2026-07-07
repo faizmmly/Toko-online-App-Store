@@ -19,7 +19,7 @@ const NavbarActions = () => {
     if(!isMounted) return null;
 
     return(
-        <div className="ml-auto flex items-center gap-x-4">
+        <div className="flex items-center gap-x-1.5 sm:gap-x-4 shrink-0">
             <motion.button
             key={cart.items.length}
             initial={{scale: 1}}
