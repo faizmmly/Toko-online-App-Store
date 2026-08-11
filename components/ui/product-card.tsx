@@ -8,7 +8,7 @@ import IconButton from "./icon-button";
 import { Expand, Heart, ShoppingCart } from "lucide-react";
 import Currency from "./currency";
 import { useRouter } from "next/navigation";
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import usePreviewModal from "@/hooks/use-preview-modal";
 import { useWishlist } from "@/hooks/useWishlist";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
@@ -19,6 +19,11 @@ interface ProductCardProps {
 
 
 const ProductCard: React.FC<ProductCardProps> = ({data}) => {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const previewModal = usePreviewModal();
     const router = useRouter();
@@ -26,7 +31,7 @@ const ProductCard: React.FC<ProductCardProps> = ({data}) => {
     const { toggle, isWishlisted } = useWishlist();
     const { addToRecent } = useRecentlyViewed();
 
-    const wishlisted = isWishlisted(data.id);
+    const wishlisted = isMounted ? isWishlisted(data.id) : false;
 
     const handleClick = () => {
         addToRecent({
@@ -108,9 +113,11 @@ const ProductCard: React.FC<ProductCardProps> = ({data}) => {
             {/* description product */}
             <div className="space-y-1 pt-3 flex-1 flex-col justify-between">
                 <p className="font-semibold text-sm md:text-base line-clamp-2 text-neutral-800 dark:text-neutral-200 loading-snug">
-                    {data.name}</p>
+                    {data.name}
+                </p>
                 <p className="text-xs sm:text-sm text-gray-500 dark:text-neutral-400 mt-0.5">
-                    {data.category?.name}</p>
+                    {data.category?.name}
+                </p>
             </div>
             <div className="flex items-center justify-between pt-2 border-t border-neutral-100 dark:border-neutral-800/60 mt-3 shrink-0">
                 <Currency value={data?.price} />

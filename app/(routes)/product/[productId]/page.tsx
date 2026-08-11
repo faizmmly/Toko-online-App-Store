@@ -14,7 +14,6 @@ interface ProductPageProps {
     }>
 }
 
-
 const ProductPage = async ({
     params
 }: {
@@ -40,7 +39,7 @@ const ProductPage = async ({
                          </div>
                     </div>
                     <hr className="my-10"/>
-                    <ProductList title="Produk Terkait" items={suggestedProducts}/>
+                    <ProductList title="Produk Terkait" items={filteredItems}/>
                 </div>
             </Container>
         </div>

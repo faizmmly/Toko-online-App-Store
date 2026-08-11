@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus, X } from "lucide-react";
 import { Color, Size } from "@/types";
 import { Button } from "@/components/ui/button";
-import Filter from "@/components/ui/filter"; // Filter satuan yang sudah kamu punya
+import Filter from "@/components/filter"; // Filter satuan yang sudah kamu punya
 
 interface MobileFiltersProps {
   sizes: Size[];
@@ -12,7 +12,16 @@ interface MobileFiltersProps {
 }
 
 const MobileFilters: React.FC<MobileFiltersProps> = ({ sizes, colors }) => {
+  const [isMounted, setIsMounted] = useState(false);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(false);

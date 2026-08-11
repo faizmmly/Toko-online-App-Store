@@ -5,12 +5,19 @@ import Currency from "./ui/currency";
 import { Button } from "./ui/button";
 import { MessageCircleIcon, Share2 } from "lucide-react"; // Tambah ikon share biar keren
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface InfoProps {
     data: Product
 }
 
 const Info: React.FC<InfoProps> = ({ data }) => {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
     const URL = typeof window !== "undefined" ? `${window.location.origin}/product/${data?.id}` : "";
     const telp = process.env.NEXT_PUBLIC_TELP;
     const pesan = encodeURIComponent(`Halo, saya tertarik membeli ${data?.name} dengan harga ${data?.price}. Link produk: ${URL}`);
@@ -32,6 +39,31 @@ const Info: React.FC<InfoProps> = ({ data }) => {
             </div>
 
             <hr className="my-6 border-gray-100" />
+
+            <div className="flex flex-col gap-y-4 mb-6">
+                <div className="flex items-center gap-x-4">
+                    <span className="w-16 text-sm font-semibold text-gray-500">Ukuran:</span>
+                    <span className="rounded-md border border-gray-300 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-800">
+                        {data?.size?.name ? `${data.size.name} (${data.size.value})` : "-"}
+                    </span>
+                </div>
+            </div>
+
+            {/* Row Warna */}
+            <div className="flex items-center gap-x-4">
+            <span className="w-16 text-sm font-semibold text-gray-500">Warna:</span>
+            <div className="flex items-center gap-x-2">
+                <span className="text-xs font-medium text-gray-800">
+                    {data?.color?.name || "-"}
+                </span>
+                {data?.color?.value && (
+                    <div
+                        className="h-5 w-5 rounded-full border border-gray-300 shadow-sm"
+                        style={{ backgroundColor: data.color.value }}
+                    />
+                )}
+            </div>
+            </div>
 
             <div className="space-y-4">
                 <p className="text-gray-600 leading-relaxed italic">

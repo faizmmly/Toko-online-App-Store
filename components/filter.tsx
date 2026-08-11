@@ -4,7 +4,7 @@ import { Color, Size } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string"; // Pastikan sudah install library 'query-string'
 import { cn } from "@/lib/utils";
-import { Button } from "./button"; // Menggunakan komponen Button custom milikmu
+import { Button } from "./ui/button"; // Menggunakan komponen Button custom milikmu
 
 interface FilterProps {
   data: (Size | Color)[];
@@ -43,6 +43,10 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
     router.push(url);
   };
 
+  if(!data || data.length === 0){
+    return null;
+  }
+
   return (
     <div className="mb-8">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -61,7 +65,7 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
               )}
               onClick={() => onClick(filter.id)}
             >
-              {filter.name}
+              {filter.name || (filter as Size).value}
             </Button>
           </div>
         ))}
