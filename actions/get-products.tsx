@@ -23,7 +23,12 @@ const getProducts = async (query: Query = {}): Promise<Product[]> => {
     })
 
     const res = await fetch(url, { cache: 'no-store' });
+
+    if(!res.ok){
+        console.error("Failed to fetch products", await res.text());
+    }
+
     return res.json();
-}
+};
 
 export default getProducts;

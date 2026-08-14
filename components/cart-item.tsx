@@ -4,6 +4,8 @@ import Image from "next/image";
 import useCart from "@/hooks/use-cart";
 import { Product } from "@/types";
 import { X } from "lucide-react";
+import { span } from "framer-motion/client";
+import { formatter } from "@/lib/utils";
 
 interface CartItemProps {
     data: Product;
@@ -13,37 +15,52 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
     const cart = useCart();
 
     return (
-        <li className="flex py-6 border-b">
-      <div className="relative h-24 w-24 rounded-md overflow-hidden sm:h-48 sm:w-48">
-        <Image
-          fill
-          src={data.images[0].url}
-          alt=""
-          className="object-cover object-center"
-        />
-      </div>
+      <li className="flex py-6 border-b border-gray-200 dark:border-neutral-800">
+        <div className="relative h-24 w-24 rounded-lg overflow-hidden sm:h-32 sm:w-32 bg-gray-100 dark:bg-neutral-800 flex shrink-0">
+          <Image
+            fill
+            src={data.images[0].url}
+            alt={data.name}
+            className="object-cover object-center"
+          />
+        </div>
+
       <div className="relative ml-4 flex flex-1 flex-col justify-between sm:ml-6">
         <div className="absolute z-10 right-0 top-0">
           <button 
             onClick={() => cart.removeItem(data.id)}
-            className="rounded-full flex items-center justify-center bg-white border shadow-md p-2 hover:scale-110 transition"
+            className="rounded-full flex items-center justify-center bg-white border dark:bg-neutral-900 shadow-sm p-2 hover:bg-gray-100 dark:hover:bg-neutral-800 hover:scale-105 active:scale-95 transition"
+            aria-label="Hapus Item"
           >
-            <X size={15} />
+            <X size={15} className="text-gray-600 dark:text-gray-400"/>
           </button>
         </div>
-        <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
-          <div className="flex justify-between">
-            <p className="text-lg font-semibold text-black">{data.name}</p>
+
+        <div className="pr-10 sm:pr-0">
+            <p className="text-base font-semibold text-gray-900 dark:text-white sm:text-lg">
+              {data.name}
+            </p>
+          
+          <div className="mt-2 flex items-center gap-x-2 text-xs">
+            {data.color?.name && (
+                <span className="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 font-medium">
+                  {data.color.name}
+              </span>
+              )}
+              {data.size?.name && (
+                <span className="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 font-medium">
+                  {data.size.name}
+                </span>
+              )}
           </div>
-          <div className="mt-1 flex text-sm">
-            <p className="text-gray-500">{data.color?.name}</p>
-            <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">{data.size?.name}</p>
-          </div>
-          <p className="mt-1 text-sm font-semibold text-black">{data.price}</p>
+
+          <p className="mt-3 text-sm font-bold text-gray-900 dark:text-white sm:text-base">
+            {formatter.format(Number(data.price))}
+            </p>
         </div>
       </div>
     </li>
     );
-}
+};
 
 export default CartItem;
