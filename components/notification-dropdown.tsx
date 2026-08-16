@@ -2,6 +2,7 @@
 
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from "@headlessui/react";
 import { Bell, ShoppingBag, CheckCircle, CreditCard, Clock } from "lucide-react";
+import { useEffect, useState } from "react";
 
 // Contoh data statis notifikasi transaksi (nanti bisa diambil dari state / database)
 const dummyNotifications = [
@@ -26,6 +27,16 @@ const dummyNotifications = [
 ];
 
 const NotificationDropdown = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted){
+    return null;
+  }
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>

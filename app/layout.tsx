@@ -6,7 +6,7 @@ import Navbar from "@/components/navbar";
 import { Suspense } from "react";
 import ModalProvider from "@/providers/modal-provider";
 import ToastProvider from "@/providers/toast-provider";
-import SearchBar from "@/components/search-bar";
+import { NavbarSearch } from "@/components/search-bar";
 import getProducts from "@/actions/get-products"; 
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -27,7 +27,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const products = await getProducts();
+  const products = await getProducts({});
 
   return (
     <ClerkProvider>

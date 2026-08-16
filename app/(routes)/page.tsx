@@ -9,32 +9,70 @@ import { Suspense } from "react";
 
 export const revalidate = 0;
 
-const FeaturedProducts = async () => {
-    const products= await getProducts({ isFeatured: true });
-    return <ProductList title="Product Unggulan" items={products} />;
+interface HomePageProps {
+    searchParams: Promise<{
+        categoryId?: string;
+        colorId?: string;
+        sizeId?: string;
+        name?: string;
+    }>;
 }
 
-const HomePage =  async () => {
+const ProductsSection = async ({
+    searchParams,
+}: {
+    searchParams: Promise<{ 
+        name?: string;
+        categoryId?: string;
+        colorId?: string;
+        sizeId?: string;
+    }>;
+}) => {
+    const params = await searchParams;
+    const isSearching = Boolean(params.name && params.name.trim() !== "");
 
+    const products = await getProducts({
+        name: params.name,
+        categoryId: params.categoryId,
+        colorId: params.colorId,
+        sizeId: params.sizeId,
+        isFeatured: isSearching ? undefined : true,
+    });
+
+    const title = isSearching
+        ? `Hasil Pencarian: "${params.name}"`
+        : "Produk Unggulan";
+
+    return <ProductList title={title} items={products}/>;
+}
+
+const HomePage =  async ({ searchParams }: HomePageProps) => {
     const bannersData = getBanners();
     const banners = await bannersData;
+    const params = await searchParams;
 
     return (
         <div className="bg-white dark:bg-neutral-900 transition-colors duration-300">
             <Container>
                 <div className="space-y-12 pb-16 pt-6">
                     
+                {!params.name && (
+                    <>
                     {banners && banners.length > 0 ? (
                         <Banner data={banners} />
                     ) : (
                         <div className="h-[200px] sm:h[300px] md:h[400px] w-full bg-gray-50 dark:bg-neutral-800 border-dashed border-gray-200 dark:border-neutral-700 animate-pulse rounded-2xl flex items-center justify-center">
-                                <p className="text-sm font-medium text-gray-400">Banner belum diatur di Admin</p>
-                            </div>
+                            <p className="text-sm font-medium text-gray-400">
+                                Banner belum diatur di Admin
+                            </p>
+                        </div>
                     )}
+                    </>
+                )}
 
                     <div className="px-4 sm:px-6 lg:px-8">
                         <Suspense fallback={<ProductListSkeleton count={4} />}>
-                            <FeaturedProducts />
+                            <ProductsSection searchParams={searchParams}/>
                         </Suspense>
                     </div>
 
