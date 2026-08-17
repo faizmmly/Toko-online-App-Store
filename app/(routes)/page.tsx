@@ -1,7 +1,7 @@
 import getBanners from "@/actions/get-banners";
 import getProducts from "@/actions/get-products";
 import Banner from "@/components/banner";
-import ProductList from "@/components/product-list";
+import ProductListClient from "@/components/product-list-client";
 import RecentlyViewed from "@/components/recently-viewed";
 import Container from "@/components/ui/container"
 import ProductListSkeleton from "@/components/ui/product-list-skeleton";
@@ -31,20 +31,32 @@ const ProductsSection = async ({
     const params = await searchParams;
     const isSearching = Boolean(params.name && params.name.trim() !== "");
 
-    const products = await getProducts({
+    const queryParams = {
         name: params.name,
         categoryId: params.categoryId,
         colorId: params.colorId,
         sizeId: params.sizeId,
         isFeatured: isSearching ? undefined : true,
-    });
+    };
+
+    const products = await getProducts({
+        ...queryParams,
+        page: 1,
+        limit: 8,
+    })
 
     const title = isSearching
         ? `Hasil Pencarian: "${params.name}"`
         : "Produk Unggulan";
 
-    return <ProductList title={title} items={products}/>;
-}
+    return (
+    <ProductListClient 
+        title={title} 
+        initialProducts={products}
+        searchParamsProps = {queryParams}
+        />
+    );
+};
 
 const HomePage =  async ({ searchParams }: HomePageProps) => {
     const bannersData = getBanners();

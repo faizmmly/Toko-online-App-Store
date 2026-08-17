@@ -10,6 +10,8 @@ interface Query {
     sizeId?: string;
     isFeatured?: boolean;
     name?: string;
+    page?: number;
+    limit?: number;
 }
 
 const getProducts = async (query: Query = {}): Promise<Product[]> => {
@@ -21,8 +23,12 @@ const getProducts = async (query: Query = {}): Promise<Product[]> => {
             sizeId: query.sizeId,
             isFeatured: query.isFeatured,
             name: query.name,
-        }
-    })
+            page: query.page,
+            limit: query.limit,
+        },
+    },
+    { skipNull: true, skipEmptyString: true }
+);
 
     const res = await fetch(url, { cache: 'no-store' });
 
